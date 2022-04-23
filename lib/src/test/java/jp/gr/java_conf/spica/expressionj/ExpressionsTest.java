@@ -49,7 +49,6 @@ class ExpressionsTest {
       assertThat(answer).isEqualTo(expected);
     }
 
-
     @ParameterizedTest
     @CsvSource(value = {
         "1, 1",
