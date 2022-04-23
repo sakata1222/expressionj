@@ -17,6 +17,10 @@ repositories {
     mavenCentral()
 }
 
+tasks.withType(JavaCompile) {
+    options.compilerArgs.addAll(["--release", "8", "-Xlint:all", "-Werror"])
+}
+
 dependencies {
     testImplementation 'org.assertj:assertj-core:3.22.0'
 }
