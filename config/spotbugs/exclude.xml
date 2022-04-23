@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<FindBugsFilter>
+  <Match>
+    <AND>
+      <Class name="jp.gr.java_conf.spica.expressionj.*Test"/>
+    </AND>
+    <Bug code="SIC"/>
+  </Match>
+</FindBugsFilter>
