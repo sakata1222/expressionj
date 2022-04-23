@@ -12,7 +12,8 @@ class FalseThen<V> implements Then<V> {
   @Override
   public V elseEx(Supplier<V> elseValueSupplier) {
     return Objects.requireNonNull(elseValueSupplier,
-            "value supplier should not be null. If you want to use null as a return value of if expression, specify () -> null")
+            "value supplier should not be null. "
+                + "If you want to use null as a return value of if expression, specify () -> null")
         .get();
   }
 
