@@ -48,32 +48,5 @@ class ExpressionsTest {
 
       assertThat(answer).isEqualTo(expected);
     }
-
-    @ParameterizedTest
-    @CsvSource(value = {
-        "1, 1",
-        "2, 2",
-        "3, Fizz",
-        "4, 4",
-        "5, Buzz",
-        "6, Fizz",
-        "7, 7",
-        "8, 8",
-        "9, Fizz",
-        "10, Buzz",
-        "11, 11",
-        "12, Fizz",
-        "13, 13",
-        "14, 14",
-        "15, FizzBuzz",
-    })
-    void fizzBuzz(int i, String expected) {
-      String fizzBuzz = ifExp(i % 15 == 0).then(() -> "FizzBuzz")
-          .elseIf(() -> i % 3 == 0).then(() -> "Fizz")
-          .elseIf(() -> i % 5 == 0).then(() -> "Buzz")
-          .elseEx(() -> String.valueOf(i));
-
-      assertThat(fizzBuzz).isEqualTo(expected);
-    }
   }
 }
