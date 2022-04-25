@@ -20,7 +20,7 @@ import static jp.gr.java_conf.spica.expressionj.Expressions.ifExp;
 String fizzBuzz = ifExp(i % 15 == 0).then(() -> "FizzBuzz")
     .elseIf(() -> i % 3 == 0).then(() -> "Fizz")
     .elseIf(() -> i % 5 == 0).then(() -> "Buzz")
-    .elseEx(() -> String.valueOf(i));
+    .elseExp(() -> String.valueOf(i));
 ```
 
 ## Sample code
