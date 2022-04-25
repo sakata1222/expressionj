@@ -23,7 +23,7 @@ public class Expressions {
    * String fizzBuzz = ifExp(i % 15 == 0).then(() -> "FizzBuzz")
    *     .elseIf(() -> i % 3 == 0).then(() -> "Fizz")
    *     .elseIf(() -> i % 5 == 0).then(() -> "Buzz")
-   *     .elseEx(() -> String.valueOf(i));
+   *     .elseExp(() -> String.valueOf(i));
    * }
    * </pre>
    *

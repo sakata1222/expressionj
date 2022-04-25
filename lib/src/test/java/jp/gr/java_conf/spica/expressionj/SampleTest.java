@@ -3,6 +3,8 @@ package jp.gr.java_conf.spica.expressionj;
 import static jp.gr.java_conf.spica.expressionj.Expressions.ifExp;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Optional;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -17,7 +19,7 @@ class SampleTest {
   })
   void evenOdd(int i, String expected) {
     String evenOdd = ifExp(i % 2 == 0).then(() -> "even")
-        .elseEx(() -> "odd");
+        .elseExp(() -> "odd");
 
     assertThat(evenOdd).isEqualTo(expected);
   }
@@ -44,8 +46,22 @@ class SampleTest {
     String fizzBuzz = ifExp(i % 15 == 0).then(() -> "FizzBuzz")
         .elseIf(() -> i % 3 == 0).then(() -> "Fizz")
         .elseIf(() -> i % 5 == 0).then(() -> "Buzz")
-        .elseEx(() -> String.valueOf(i));
+        .elseExp(() -> String.valueOf(i));
 
     assertThat(fizzBuzz).isEqualTo(expected);
+  }
+
+  @Test
+  void ifTrueEnd() {
+    Optional<String> answer = ifExp(true).then(() -> "true!").end();
+
+    assertThat(answer).hasValue("true!");
+  }
+
+  @Test
+  void ifFalseEnd() {
+    Optional<String> answer = ifExp(false).then(() -> "true!").end();
+
+    assertThat(answer).isEmpty();
   }
 }
