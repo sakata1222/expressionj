@@ -4,6 +4,9 @@ import jp.gr.java_conf.spica.expressionj.ifexpression.IfExpression;
 import jp.gr.java_conf.spica.expressionj.ifexpression.IfFalse;
 import jp.gr.java_conf.spica.expressionj.ifexpression.IfTrue;
 
+/**
+ * Entry point of expressions.
+ */
 public class Expressions {
 
   /* Reuse instances for performance */

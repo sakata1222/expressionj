@@ -2,7 +2,7 @@ package jp.gr.java_conf.spica.expressionj.ifexpression;
 
 import java.util.Objects;
 
-public class Validations {
+class Validations {
 
   private Validations() {
   }

@@ -2,6 +2,9 @@ package jp.gr.java_conf.spica.expressionj.ifexpression;
 
 import java.util.function.Supplier;
 
+/**
+ * If.
+ */
 public class IfFalse implements IfExpression {
 
   private final FalseThen<?> falseThen = new FalseThen<>();
