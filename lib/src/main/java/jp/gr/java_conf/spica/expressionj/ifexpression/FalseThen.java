@@ -6,9 +6,6 @@ import java.util.function.Supplier;
 
 class FalseThen<V> implements Then<V> {
 
-  private static final ElseIfTrue<?> ELSE_IF_TURE = new ElseIfTrue<>();
-  private static final ElseIfFalse<?> ELSE_IF_FALSE = new ElseIfFalse<>();
-
   @Override
   public V elseExp(Supplier<V> elseValueSupplier) {
     return Validations.requireNonNullValueSupplier(elseValueSupplier).get();
@@ -18,9 +15,9 @@ class FalseThen<V> implements Then<V> {
   @SuppressWarnings("unchecked")
   public ElseIfStatement<V> elseIf(BooleanSupplier condition) {
     if (Validations.requireNonNullCondition(condition).getAsBoolean()) {
-      return (ElseIfStatement<V>) ELSE_IF_TURE;
+      return (ElseIfStatement<V>) InstanceCaches.ELSE_IF_TURE;
     } else {
-      return (ElseIfStatement<V>) ELSE_IF_FALSE;
+      return (ElseIfStatement<V>) InstanceCaches.ELSE_IF_FALSE;
     }
   }
 
