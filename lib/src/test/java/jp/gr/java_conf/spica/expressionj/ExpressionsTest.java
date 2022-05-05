@@ -19,7 +19,7 @@ class ExpressionsTest {
     @CsvSource(value = {
         "true, trueValue",
         "false, falseValue"})
-    void ifElseWithLambda(boolean condition, String expected) {
+    void ifElse(boolean condition, String expected) {
       String answer = ifExp(condition).then(() -> "trueValue")
           .elseExp(() -> "falseValue");
 
@@ -27,10 +27,20 @@ class ExpressionsTest {
     }
 
     @Test
-    void ifElseDoesNotReferElseValueWhenIfConditionIsTrue() {
-      assertThatNoException().isThrownBy(() -> assertThat(
-          ifExp(true).then(() -> "trueValue").elseExp(null)).isEqualTo(
-          "trueValue"));
+    void ifElseDoesNotCallTrueValueWhenIfConditionIsFalse() {
+      assertThatNoException().isThrownBy(() ->
+          ifExp(false).then(() -> {
+            throw new RuntimeException("should not be called");
+          }).elseExp(() -> "falseValue"));
+    }
+
+    @Test
+    void ifElseDoesNotCallElseValueWhenIfConditionIsTrue() {
+      assertThatNoException().isThrownBy(() ->
+          ifExp(true).then(() -> "trueValue")
+              .elseExp(() -> {
+                throw new RuntimeException("should not be called");
+              }));
     }
 
     @ParameterizedTest
@@ -46,6 +56,29 @@ class ExpressionsTest {
           .elseExp(() -> "c");
 
       assertThat(answer).isEqualTo(expected);
+    }
+
+    @Test
+    void elseIfDoesNotCallElseIfValueWhenIfConditionIsTrue() {
+      assertThatNoException().isThrownBy(() ->
+          ifExp(true).then(() -> "a")
+              .elseIf(() -> true).then(() -> {
+                throw new RuntimeException("should not be called");
+              })
+              .elseExp(() -> {
+                throw new RuntimeException("should not be called");
+              }));
+    }
+
+    @Test
+    void elseIfDoesNotCallElseIfValueWhenElseIfConditionIsFalse() {
+      assertThatNoException().isThrownBy(() ->
+          ifExp(false).then(() -> {
+                throw new RuntimeException("should not be called");
+              }).elseIf(() -> false).then(() -> {
+                throw new RuntimeException("should not be called");
+              })
+              .elseExp(() -> "c"));
     }
 
     @Test

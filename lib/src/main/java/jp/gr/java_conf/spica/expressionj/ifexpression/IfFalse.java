@@ -9,6 +9,7 @@ public class IfFalse implements IfExpression {
   @Override
   @SuppressWarnings("unchecked")
   public <V> Then<V> then(Supplier<V> valueSupplier) {
+    Validations.requireNonNullValueSupplier(valueSupplier);
     return (Then<V>) falseThen;
   }
 }

@@ -1,6 +1,5 @@
 package jp.gr.java_conf.spica.expressionj.ifexpression;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.function.BooleanSupplier;
 import java.util.function.Supplier;
@@ -12,16 +11,13 @@ class FalseThen<V> implements Then<V> {
 
   @Override
   public V elseExp(Supplier<V> elseValueSupplier) {
-    return Objects.requireNonNull(elseValueSupplier,
-            "value supplier should not be null. "
-                + "If you want to use null as a return value of if expression, specify () -> null")
-        .get();
+    return Validations.requireNonNullValueSupplier(elseValueSupplier).get();
   }
 
   @Override
   @SuppressWarnings("unchecked")
   public ElseIfStatement<V> elseIf(BooleanSupplier condition) {
-    if (condition.getAsBoolean()) {
+    if (Validations.requireNonNullCondition(condition).getAsBoolean()) {
       return (ElseIfStatement<V>) ELSE_IF_TURE;
     } else {
       return (ElseIfStatement<V>) ELSE_IF_FALSE;
