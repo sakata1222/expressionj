@@ -73,9 +73,11 @@ class ExpressionsTest {
     @Test
     void elseIfDoesNotCallElseIfValueWhenElseIfConditionIsFalse() {
       assertThatNoException().isThrownBy(() ->
-          ifExp(false).then(() -> {
+          ifExp(false)
+              .then(() -> {
                 throw new RuntimeException("should not be called");
-              }).elseIf(() -> false).then(() -> {
+              })
+              .elseIf(() -> false).then(() -> {
                 throw new RuntimeException("should not be called");
               })
               .elseExp(() -> "c"));
