@@ -9,11 +9,13 @@ class TrueThen<V> implements Then<V> {
   private final Supplier<V> valueSupplier;
 
   TrueThen(Supplier<V> valueSupplier) {
+    Validations.requireNonNullValueSupplier(valueSupplier);
     this.valueSupplier = valueSupplier;
   }
 
   @Override
   public V elseExp(Supplier<V> elseValueSupplier) {
+    Validations.requireNonNullCondition(elseValueSupplier);
     return valueSupplier.get();
   }
 
