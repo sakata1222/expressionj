@@ -36,3 +36,7 @@ String fizzBuzz = ifExp(i % 15 == 0).then(() -> "FizzBuzz")
 
 See also
 the [sample code](https://github.com/sakata1222/expressionj/blob/main/lib/src/test/java/jp/gr/java_conf/spica/expressionj/SampleTest.java)
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md)
