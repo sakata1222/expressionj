@@ -40,7 +40,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
-          arguments: build sonarqube
+          arguments: build performanceTest sonarqube
+
+      - name: Upload test and analysis result
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: report
+          path: lib/build/reports/**/*
 
       - uses: codecov/codecov-action@v2
         with:

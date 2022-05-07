@@ -37,6 +37,34 @@ String fizzBuzz = ifExp(i % 15 == 0).then(() -> "FizzBuzz")
 See also
 the [sample code](https://github.com/sakata1222/expressionj/blob/main/lib/src/test/java/jp/gr/java_conf/spica/expressionj/SampleTest.java)
 
+## Performance
+
+If expression is a little slower than If statement, but it's enough fast when number of calls is
+not huge (e.g. over 10000000).
+
+Here is a result of
+the [benchmark](https://github.com/sakata1222/expressionj/blob/main/lib/src/test/java/jp/gr/java_conf/spica/expressionj/PerformanceTest.java)
+in my environment.
+
+The benchmark just performs solve FizzBuzz and sum up of the length of the result.
+
+- java.vm.vendor:Eclipse Adoptium
+- java.vm.version:17.0.3+7
+- os.name:Windows 10
+- os.version:10.0
+
+Benchmark of FizzBuzz.
+Loop count is 10000000.
+Elapsed Time in ms:
+
+|Count|If statement with method|If Expression|
+|---|---|---|
+|1|201|472|
+|2|154|419|
+|3|146|386|
+|4|146|396|
+|5|139|428|
+
 ## Changelog
 
 See [CHANGELOG.md](CHANGELOG.md)
