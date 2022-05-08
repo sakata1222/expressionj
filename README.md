@@ -44,14 +44,14 @@ not huge (e.g. over 10000000).
 
 Here is a result of
 the [benchmark](https://github.com/sakata1222/expressionj/blob/main/lib/src/test/java/jp/gr/java_conf/spica/expressionj/PerformanceTest.java)
-in my environment.
+in the CI environment.
 
 The benchmark just performs solve FizzBuzz and sum up of the length of the result.
 
-- java.vm.vendor:Eclipse Adoptium
-- java.vm.version:17.0.3+7
-- os.name:Windows 10
-- os.version:10.0
+- java.vm.vendor:AdoptOpenJDK
+- java.vm.version:11.0.11+9
+- os.name:Linux
+- os.version:5.13.0-1022-azure
 
 Benchmark of FizzBuzz.
 Loop count is 10000000.
@@ -59,11 +59,11 @@ Elapsed Time in ms:
 
 |Count|If statement with method|If Expression|
 |---|---|---|
-|1|201|472|
-|2|154|419|
-|3|146|386|
-|4|146|396|
-|5|139|428|
+|1|374|701|
+|2|247|543|
+|3|240|612|
+|4|260|591|
+|5|231|610|
 
 ## Changelog
 
