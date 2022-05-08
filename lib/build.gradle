@@ -20,7 +20,7 @@ sonarqube {
 repositories {
     mavenCentral()
 }
-def libVersion = findProperty("libVersion") ?: "0.0.0"
+def libVersion = findProperty("libVersion") ?: "0.0.0-SNAPSHOT"
 def release = Boolean.valueOf(findProperty("release") ?: "false")
 publishing {
     publications {
@@ -90,16 +90,48 @@ java {
     withSourcesJar()
 }
 
-dependencies {
-    testImplementation 'org.assertj:assertj-core:3.22.0'
-}
-
 testing {
     suites {
         test {
             useJUnitJupiter('5.8.1')
+            dependencies {
+                implementation project
+                implementation 'org.assertj:assertj-core:3.22.0'
+                implementation 'org.apache.commons:commons-lang3:3.12.0'
+            }
+            targets {
+                all {
+                    testTask.configure {
+                        useJUnitPlatform {
+                            excludeTags "performance"
+                        }
+                    }
+                }
+            }
+        }
+        performanceTest(JvmTestSuite) {
+            sources {
+                java {
+                    srcDirs = ['src/test/java']
+                }
+                resources {
+                    srcDirs = ['src/test/resources']
+                }
+            }
+            targets {
+                all {
+                    testTask.configure {
+                        useJUnitPlatform {
+                            includeTags "performance"
+                        }
+                    }
+                }
+            }
         }
     }
+}
+configurations {
+    performanceTestImplementation.extendsFrom testImplementation
 }
 test {
     finalizedBy jacocoTestReport
