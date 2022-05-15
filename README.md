@@ -32,6 +32,12 @@ String fizzBuzz = ifExp(i % 15 == 0).then(() -> "FizzBuzz")
     .elseExp(() -> String.valueOf(i));
 ```
 
+## Switch expression
+
+**If you use Java14 or later, you can
+use [the official switch expression](https://docs.oracle.com/en/java/javase/14/language/switch-expressions.html)
+.**
+
 ## Sample code
 
 See also
