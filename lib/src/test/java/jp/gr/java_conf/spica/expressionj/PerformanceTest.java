@@ -58,7 +58,7 @@ class PerformanceTest {
     System.out.println(markdownRow("---", "---", "---"));
   }
 
-  @RepeatedTest(5)
+  @RepeatedTest(6)
   @Tag("performance")
   void ifExpressionTest(RepetitionInfo repetitionInfo) {
 
@@ -69,6 +69,11 @@ class PerformanceTest {
         repetitionInfo.getCurrentRepetition(),
         ifStatementResult.elapsedTime,
         ifExpressionResult.elapsedTime));
+
+    if (repetitionInfo.getCurrentRepetition() == 1) {
+      // the 1st take is just a warming up.
+      return;
+    }
 
     assertAll(
         () -> assertThat(ifStatementResult.lengthCount)
