@@ -38,6 +38,23 @@ String fizzBuzz = ifExp(i % 15 == 0).then(() -> "FizzBuzz")
 use [the official switch expression](https://docs.oracle.com/en/java/javase/14/language/switch-expressions.html)
 .**
 
+```java
+import static jp.gr.java_conf.spica.expressionj.Expressions.ifExp;
+import static jp.gr.java_conf.spica.expressionj.switchexpression.Cases.caseEq;
+import static jp.gr.java_conf.spica.expressionj.switchexpression.Cases.caseIn;
+
+import jp.gr.java_conf.spica.expressionj.switchexpression.Cases;
+
+/*..snip..*/
+
+int length = switchExp(day).cases(
+    caseIn(MONDAY, FRIDAY, SUNDAY).yield(() -> 6),
+    caseEq(TUESDAY).yield(() -> 7),
+    caseIn(THURSDAY, SATURDAY).yield(() -> 8),
+    caseIn(WEDNESDAY).yield(() -> 9),
+    Cases.<Day>caseDefault().yield(() -> -1));
+```
+
 ## Sample code
 
 See also
