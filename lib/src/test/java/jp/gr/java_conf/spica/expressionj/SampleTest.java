@@ -12,13 +12,18 @@ import static jp.gr.java_conf.spica.expressionj.SampleTest.Day.WEDNESDAY;
 import static jp.gr.java_conf.spica.expressionj.switchexpression.Cases.caseEq;
 import static jp.gr.java_conf.spica.expressionj.switchexpression.Cases.caseIn;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import java.util.Optional;
+import java.util.stream.Stream;
 import jp.gr.java_conf.spica.expressionj.switchexpression.Cases;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class SampleTest {
 
@@ -82,6 +87,7 @@ class SampleTest {
   }
 
   @Nested
+  @TestInstance(Lifecycle.PER_CLASS)
   class SwitchExpressions {
 
     @ParameterizedTest
@@ -108,6 +114,36 @@ class SampleTest {
         assertThat(length).isEqualTo(day.name().length());
       }
     }
+
+    @ParameterizedTest
+    @MethodSource("perimeterOfShapeProvider")
+    void perimeterOfShape(Shape shape) {
+      double perimeter = switchExp(shape).cases(
+          Cases.<Shape, Rectangle>caseInstanceOf(Rectangle.class)
+              .yield(r -> r.length * 2 + r.width * 2),
+          Cases.<Shape, Circle>caseInstanceOf(Circle.class)
+              .yield(r -> 2 * r.radius * Math.PI));
+      assertThat(perimeter).isEqualTo(shape.perimeter());
+    }
+
+    @SuppressWarnings("unused")
+    Stream<Shape> perimeterOfShapeProvider() {
+      return Stream.of(
+          new Rectangle(1, 3),
+          new Circle(2));
+    }
+
+    @ParameterizedTest
+    @MethodSource("perimeterOfShapeProvider")
+    void perimeterOfShapeUnmatch() {
+      Shape shape = new EquilateralTriangle(1);
+      assertThatIllegalArgumentException()
+          .isThrownBy(() -> switchExp(shape).cases(
+              Cases.<Shape, Rectangle>caseInstanceOf(Rectangle.class)
+                  .yield(r -> r.length * 2 + r.width * 2),
+              Cases.<Shape, Circle>caseInstanceOf(Circle.class)
+                  .yield(r -> 2 * r.radius * Math.PI)));
+    }
   }
 
   enum Day {
@@ -119,5 +155,54 @@ class SampleTest {
     FRIDAY,
     SATURDAY,
     @SuppressWarnings("unused") INVALID
+  }
+
+  interface Shape {
+
+    double perimeter();
+  }
+
+  static class Rectangle implements Shape {
+
+    final double length;
+    final double width;
+
+    Rectangle(double length, double width) {
+      this.length = length;
+      this.width = width;
+    }
+
+    @Override
+    public double perimeter() {
+      return length * 2 + width * 2;
+    }
+  }
+
+  static class Circle implements Shape {
+
+    final double radius;
+
+    Circle(double radius) {
+      this.radius = radius;
+    }
+
+    @Override
+    public double perimeter() {
+      return 2 * radius * Math.PI;
+    }
+  }
+
+  static class EquilateralTriangle implements Shape {
+
+    final double edge;
+
+    EquilateralTriangle(double edge) {
+      this.edge = edge;
+    }
+
+    @Override
+    public double perimeter() {
+      return edge * 3;
+    }
   }
 }
