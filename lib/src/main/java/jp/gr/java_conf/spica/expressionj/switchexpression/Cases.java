@@ -93,4 +93,16 @@ public class Cases {
   public static <I> CaseBuilder<I> caseDefault() {
     return CaseDefault.builder();
   }
+
+  /**
+   * build an instance of case instance
+   *
+   * @param clazz class to be matched
+   * @param <I>   type of the evaluation target
+   * @param <C>   type of expected class
+   * @return c case that will be used when the specified value is instance of clazz
+   */
+  public static <I, C extends I> CaseBuilderWithArgument<I, C> caseInstanceOf(Class<C> clazz) {
+    return CaseInstanceOf.builder(clazz);
+  }
 }

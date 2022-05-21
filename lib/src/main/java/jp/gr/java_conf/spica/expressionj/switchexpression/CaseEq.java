@@ -8,7 +8,7 @@ class CaseEq<I, V> implements Case<I, V> {
   private final I condition;
   private final Supplier<V> valueSupplier;
 
-  public CaseEq(I condition, Supplier<V> valueSupplier) {
+  CaseEq(I condition, Supplier<V> valueSupplier) {
     this.condition = condition;
     this.valueSupplier = valueSupplier;
   }
@@ -31,7 +31,7 @@ class CaseEq<I, V> implements Case<I, V> {
 
     private final I condition;
 
-    public Builder(I condition) {
+    Builder(I condition) {
       this.condition = condition;
     }
 

@@ -39,7 +39,7 @@ use [the official switch expression](https://docs.oracle.com/en/java/javase/14/l
 .**
 
 ```java
-import static jp.gr.java_conf.spica.expressionj.Expressions.ifExp;
+import static jp.gr.java_conf.spica.expressionj.Expressions.switchExp;
 import static jp.gr.java_conf.spica.expressionj.switchexpression.Cases.caseEq;
 import static jp.gr.java_conf.spica.expressionj.switchexpression.Cases.caseIn;
 
@@ -53,6 +53,20 @@ int length = switchExp(day).cases(
     caseIn(THURSDAY, SATURDAY).yield(() -> 8),
     caseIn(WEDNESDAY).yield(() -> 9),
     Cases.<Day>caseDefault().yield(() -> -1));
+```
+
+```java
+import static jp.gr.java_conf.spica.expressionj.Expressions.switchExp;
+
+import jp.gr.java_conf.spica.expressionj.switchexpression.Cases;
+
+/*..snip..*/
+
+double perimeter = switchExp(shape).cases(
+    Cases.<Shape, Rectangle>caseInstanceOf(Rectangle.class)
+        .yield(r -> r.length * 2 + r.width * 2),
+    Cases.<Shape, Circle>caseInstanceOf(Circle.class)
+        .yield(r -> 2 * r.radius * Math.PI));
 ```
 
 ## Sample code
