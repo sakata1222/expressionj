@@ -76,8 +76,10 @@ the [sample code](https://github.com/sakata1222/expressionj/blob/main/lib/src/te
 
 ## Performance
 
+### If expression
+
 If expression is a little slower than If statement, but it's enough fast when number of calls is
-not huge (e.g. over 10000000).
+not huge (e.g. over 10000000(10^7)).
 
 Here is a result of
 the [benchmark](https://github.com/sakata1222/expressionj/blob/main/lib/src/test/java/jp/gr/java_conf/spica/expressionj/PerformanceTest.java)
@@ -88,19 +90,51 @@ The benchmark just performs solve FizzBuzz and sum up of the length of the resul
 - java.vm.vendor:AdoptOpenJDK
 - java.vm.version:11.0.11+9
 - os.name:Linux
-- os.version:5.13.0-1022-azure
+- os.version:5.13.0-1023-azure
 
 Benchmark of FizzBuzz.
+
 Loop count is 10000000.
+
 Elapsed Time in ms:
 
 |Count|If statement with method|If Expression|
 |---|---|---|
-|1|374|701|
-|2|247|543|
-|3|240|612|
-|4|260|591|
-|5|231|610|
+|1|252|880|
+|2|266|585|
+|3|270|582|
+|4|270|581|
+|5|265|594|
+|6|269|580|
+
+### Switch expression
+
+Switch expression is slower than Switch statement, and might be slower than
+official switch expression.
+When the number of calls is little huge (e.g. over 1000000(10^6)), please use switch statement or
+official switch expression.
+
+Here is a result of
+the [benchmark](https://github.com/sakata1222/expressionj/blob/main/lib/src/test/java/jp/gr/java_conf/spica/expressionj/PerformanceTest.java)
+in the CI environment.
+
+- java.vm.vendor:AdoptOpenJDK
+- java.vm.version:11.0.11+9
+- os.name:Linux
+- os.version:5.13.0-1023-azure
+
+Benchmark of length count of days.
+Loop count is 125000.
+Elapsed Time in ms:
+
+|Count|Switch statement with method|Switch Expression|
+|---|---|---|
+|1|95|747|
+|2|51|525|
+|3|51|481|
+|4|28|477|
+|5|20|478|
+|6|20|476|
 
 ## Changelog
 
