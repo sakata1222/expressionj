@@ -1,14 +1,14 @@
 package jp.gr.java_conf.spica.expressionj;
 
+import static jp.gr.java_conf.spica.expressionj.Day.FRIDAY;
+import static jp.gr.java_conf.spica.expressionj.Day.MONDAY;
+import static jp.gr.java_conf.spica.expressionj.Day.SATURDAY;
+import static jp.gr.java_conf.spica.expressionj.Day.SUNDAY;
+import static jp.gr.java_conf.spica.expressionj.Day.THURSDAY;
+import static jp.gr.java_conf.spica.expressionj.Day.TUESDAY;
+import static jp.gr.java_conf.spica.expressionj.Day.WEDNESDAY;
 import static jp.gr.java_conf.spica.expressionj.Expressions.ifExp;
 import static jp.gr.java_conf.spica.expressionj.Expressions.switchExp;
-import static jp.gr.java_conf.spica.expressionj.SampleTest.Day.FRIDAY;
-import static jp.gr.java_conf.spica.expressionj.SampleTest.Day.MONDAY;
-import static jp.gr.java_conf.spica.expressionj.SampleTest.Day.SATURDAY;
-import static jp.gr.java_conf.spica.expressionj.SampleTest.Day.SUNDAY;
-import static jp.gr.java_conf.spica.expressionj.SampleTest.Day.THURSDAY;
-import static jp.gr.java_conf.spica.expressionj.SampleTest.Day.TUESDAY;
-import static jp.gr.java_conf.spica.expressionj.SampleTest.Day.WEDNESDAY;
 import static jp.gr.java_conf.spica.expressionj.switchexpression.Cases.caseEq;
 import static jp.gr.java_conf.spica.expressionj.switchexpression.Cases.caseIn;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -144,17 +144,6 @@ class SampleTest {
               Cases.<Shape, Circle>caseInstanceOf(Circle.class)
                   .yield(r -> 2 * r.radius * Math.PI)));
     }
-  }
-
-  enum Day {
-    SUNDAY,
-    MONDAY,
-    TUESDAY,
-    WEDNESDAY,
-    THURSDAY,
-    FRIDAY,
-    SATURDAY,
-    @SuppressWarnings("unused") INVALID
   }
 
   interface Shape {
